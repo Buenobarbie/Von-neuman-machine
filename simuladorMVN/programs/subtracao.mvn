@@ -1,0 +1,12 @@
+0000 A016 ; Desvio para a subrotina subtração
+0002 C000 ; Parada
+
+0010 0002 ; Variável X
+0012 0001 ; Variável Y
+0014 0000 ; Resultado da subtração (X-Y)
+
+0016 0000; Início da subtortina subtração
+0018 8010; Carrega X no AC
+001A 5012; subtrai Y do AC
+001C 9014; salva AC no resultado
+001E B016; Fim da subrotina subtracao

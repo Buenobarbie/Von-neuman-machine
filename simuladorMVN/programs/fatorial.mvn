@@ -1,0 +1,26 @@
+0000 8100 ; AC = mem[100] (AC = N)
+0002 A006 ; Desvio para a subrotina fatorial
+0004 C0DE ; Fim
+
+; SUBROTINA FATORIAL
+0006 0000 ; Inicio da subrotina fatorial
+0008 101A ; Desvio para 001A caso N=0 (0!=1)
+000A 9102 ; mem[102] = AC
+000C 8100 ; AC = mem[100]
+000E 5104 ; AC = AC - 1
+0010 101E ; Desvio para fim caso AC = 0 
+0012 9100 ; mem[100] = AC
+0014 6102 ; AC = AC * mem[102]
+0016 000A ; Desvia para 000A
+0018 001E ; Desvio para o fim da subrotina
+001A 3001 ; AC = 1 (0!=1) 
+001C 9102 ; mem[102] = AC
+001E B006 ; Fim da subrotina fatorial
+
+
+
+0100 0003 ; Valor de N
+0102 0000 ; Resultado do fatorial
+0104 0001 ; Valor 1
+
+

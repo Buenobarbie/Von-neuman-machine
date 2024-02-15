@@ -1,0 +1,7 @@
+0000 8010 ; AC = mem[10]
+0002 4012 ; AC += mem[12]
+0004 9014 ; mem[14] = AC
+0006 C0DE ; fim
+0010 FF91 ; Variável 1
+0012 014D ; Variável 2
+0014 0000 ; Resultado da soma
