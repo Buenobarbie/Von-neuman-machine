@@ -1,0 +1,15 @@
+0000 D000 ; Entrada de dados do teclado
+0002 9100 ; Escreve o que foi lido na posição 100
+0004 D000 ; Entrada de dados do teclado
+0006 9106 ; Escreve o que foi lido na posição 100
+0008 D000 ; Entrada de dados do teclado
+000A 9102 ; Escreve o que foi lido na posição 102
+000C 4100 ; Ac = X + Y
+000E 9104 ; mem[104] = X + Y
+0010 E104 ; Exibe a soma
+0012 C0DE ; Fim
+
+
+0100 0000 ; X
+0102 0000 ; Y
+0104 0000 ; Soma
