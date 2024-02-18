@@ -1,15 +1,59 @@
 0000 D000 ; Entrada de dados do teclado
 0002 9100 ; Escreve o que foi lido na posição 100
 0004 D000 ; Entrada de dados do teclado
-0006 9106 ; Escreve o que foi lido na posição 100
+0006 9200 ; Escreve o que foi lido na posição 200
 0008 D000 ; Entrada de dados do teclado
-000A 9102 ; Escreve o que foi lido na posição 102
-000C 4100 ; Ac = X + Y
-000E 9104 ; mem[104] = X + Y
-0010 E104 ; Exibe a soma
-0012 C0DE ; Fim
+000A 9104 ; Escreve o que foi lido na posição 104
+
+000C 80FF ; Ac = X[1]
+00E  0010 ;
+0010 9114 ; mem[114] = AC
+0012 5110 ; Ac = X[1] - 48
+0014 6112 ; Ac = X[1] * 10
+0016 4100 ; Ac = X[1] + X[2]
+0018 5110 ; Ac = x[1] + x[2] - 48
+001A 5115 ; Tira o excesso
+001C 9100 ; mem[0100] = X
+
+001E 8103 ; Ac = Y[1]
+0020 9118 ; mem[118] = AC
+0022 5110 ; Ac = Y[1] - 48
+0024 6112 ; Ac = Y[1] * 10
+0026 4104 ; Ac = Y[1] + Y[2]
+0028 5110 ; Ac = Y[1] + Y[2] - 48
+002A 5119 ; Tira o excesso
+002C 9104 ; mem[0104] = Y
+
+002E 4100 ; Ac = X + Y
+0030 0032 ; 
+0032 9108 ; mem[108] = X + Y
+0034 7112 ; Ac/10 = dezena da soma
+0036 911A ; mem[11A] = Ac
+0038 6112 ; Ac * 10
+003A 911E ; mem[11E] = Ac
+003C 8108 ; Ac = X+Y
+003E 511E ; Ac = unidades
+0040 4110 ; Ac = unidades AsCII
+0042 911C ; mem[11c] = Ac
+0044 811A ; Ac = mem[11A]
+0046 4110 ; Ac = dezenas AsCII
+0048 911b ; mem[11B] = Ac
+004A 811C ; AC = soma ascii
+
+004C E100 ; Exibe a soma
+004E C0DE ; Fim
 
 
 0100 0000 ; X
-0102 0000 ; Y
-0104 0000 ; Soma
+0104 0000 ; Y
+0108 0000 ; Soma
+
+0110 0030 ; 48
+0112 000A ; 10
+
+0114 0000 ; X[1]
+0118 0000 ; Y[1]
+
+011A 0000 ; Soma dezenas
+011C 0000 ; Soma unidades
+
