@@ -92,6 +92,8 @@ The MVN accepts 16 instructions, those are:
 | E | PD |Send value in AC to operand device |
 | F | SO |Calls the supervisor to deal with specific codes, which are given by the operand |
 
+![Conjunto de Instruções](./commands.jpeg)
+
 For coding to the MVN, you may write a file (extension ".mvn" preferably) that discribes the inicial state of the memory. To do that you have to set the content of one pair of addresses per line, that is done the following way:
 
 ```
