@@ -1,0 +1,4 @@
+ 
+0700  E300; Iniciar o dumper
+0704  ; Endereço inicial
+0706  ; Quantidade
