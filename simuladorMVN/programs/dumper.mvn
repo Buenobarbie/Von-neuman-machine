@@ -4,7 +4,7 @@
 0004 0002 ; Informação para teste
 
 0704 0002 ; Endereço inicial 
-0706 0004 ; Número de palavras
+0706 0002 ; Número de palavras
 
 ; Calcula o endereço final de leitura do dumper
 0708 8704 ; AC = ENEDERECO INICIAL
@@ -12,8 +12,8 @@
 070C 8706 ; AC = QTD DE PALAVRAS
 070E 9AFC ; PP = AC
 0710 4AFA ; AC = QP + EP
-#TODO AC += QP
-0712 4AF0 ; AC += 2
+
+0712 4AFC ; AC += PP
 0714 9AF6 ; EF = AC
 
 ; primeiro while passar por todas as memorias INICIO
@@ -55,7 +55,7 @@
 074C 9AFE ; PALAVRAS = AC
 074E 8AFA ; AC = EP
 0750 4AFE ; AC += PALAVRAS (AC = ENDEREÇO FINAL DE LEITURA)
-0752 0754 ; ------------
+0752 4AFE ; AC += PALAVRAS 
 0754 9AF8 ; EPP = AC (SALVA ENDEREÇO FINAL)
 0756 A900 ; CHAMA A FUNCAO CRIA HEADER
 0758 8AFA ; AC = EP 
