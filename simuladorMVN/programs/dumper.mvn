@@ -6,7 +6,9 @@
 0008 0001 ;
 000A 0001 ;
 
-0700 0708
+; Subrotina DUMPER
+0700 0000 ;
+0702 0708 ;
 0704 0002 ; Endereço inicial 
 0706 0005 ; Número de palavras
 
