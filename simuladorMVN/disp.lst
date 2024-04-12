@@ -1,1 +1,2 @@
-3 0 dump.dat e
+3 0 ep_in.asm l
+3 1 ep_out.mvn e

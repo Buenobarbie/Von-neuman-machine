@@ -36,6 +36,9 @@ K100 K /100
 K1000 K /1000
 K30 K /30
 K41 K /41
+K9  K =9
+K5 K =5
+D11 K =11
 
 ; DECIMAL
 D10 K =10
@@ -168,6 +171,8 @@ FINDING K =0
 LISTRUN K /2 ; ADDRESS LIST BEGINING
 GETINSTRUCTION K /0000
     MM FINDING
+    LD K2
+    MM LISTRUN
     FINDBGN LD LISTRUN
         AD LOAD
         MM READLABEL1
@@ -193,6 +198,8 @@ NUM1 K =0
 NUM2 K =0
 NUM3 K =0
 NUM4 K =0
+K8000 K /8000
+K8   K =8
 
 
 ; --------- TASK NUMTOASCII ----------
@@ -202,27 +209,27 @@ NUM4 K =0
 NUMTOASCII K /0000  
     MM NUM ; SAVE NUMBER TO BE CONVERTED (367F)
 
-    GETNUM1 DV K1000    ; GET FIRST NUMBER OF ADDRESS (0003)
+    GETNUM1 SC ROUND    ;
             SC CONVERT  ; GET ASCII
             ML K100     ; SHIFT LEFT (0033) -> (3300)
             MM NUM1     ; SAVES IN NUMBER 1 (3300)
 
     GETNUM2 LD NUM
-            ML K10     ; GET SECOND NUMBER OF ADDRESS  (67F0)
-            DV K1000   ; (0006)
+            ML K10     ; GET SECOND NUMBER OF ADDRESS 
+            SC ROUND   ;
             SC CONVERT ; GET ASCII
             MM NUM2    ; SAVES IN NUMBER 2 (0036)
 
     GETNUM3 LD NUM
-            ML K100    ; GET THIRD NUMBER OF ADDRESS  (7F00) 
-            DV K1000   ; (0007)
+            ML K100    ; GET THIRD NUMBER OF ADDRESS 
+            SC ROUND   ;
             SC CONVERT ; GET ASCII
             ML K100    ; SHIFT LEFT (0037) -> (3700)
             MM NUM3    ; SAVES IN NUMBER 3 (3700)
 
     GETNUM4 LD NUM
             ML K1000   ; GET FOURTH NUMBER OF ADDRESS   
-            DV K1000   ; (000F)
+            SC ROUND   ;
             SC CONVERT ; GET ASCII
             MM NUM4    ; SAVES IN NUMBER 4 (0046)     
 
@@ -234,21 +241,47 @@ NUMTOASCII K /0000
             PD /301  ; WRITES
 RS NUMTOASCII
 
+
+ROUND K /0000
+        SB k8000;
+        JN NOERROR;
+        DV K1000;
+        AD K8   ;
+        JP ENDROUND;
+    NOERROR AD K8000;
+            DV K1000;
+ENDROUND RS ROUND
+
+
+
     
 ; -------- TASK CONVERT --------
+
 CONVERT K /0000
-    SB D10         ; SUBTRACT 10 (DECIMAL)
-    JN NUMBER      ; IF < 10 IS A NUMBER
-    JP LETTER      ; IF >= 10 IS A LETTER (A-F)
+            SB D10         ; SUBTRACT 10 (DECIMAL)
+            JN NUMBER      ; IF < 10 IS A NUMBER
+            JP LETTER      ; IF >= 10 IS A LETTER (A-F);
 
     NUMBER  AD D10    ; GET NUMBER (LAST ACTION WAS SB D10)
             AD K30    ; 0 IN ASCII = 30
             JP ENDCONVERT
 
-    LETTER AD K41   ; A IN ASCII = 41
+    LETTER  AD K41   ; A IN ASCII = 41
             JP ENDCONVERT
 
-
+;; -----------------------------------------------------
+ ;   JN LETTERAND8      ; IF < 0 IS BTW 8 AND F
+ ;   JP NUMBERMAX6      ; IF >= 0 IS A NUMBER BTW 0 AND 7 (A-F);
+;
+ ;   NUMBER8 AD D10
+ ;   NUMBERMAX6 AD K30    ; 0 IN ASCII = 30
+ ;           JP ENDCONVERT
+;
+ ;   LETTERAND8 AD K5   ; -8 -> 8, -7 -> 9...
+ ;           ; SB D10      ; SUBTRACT 10 (DECIMAL)
+ ;           JN NUMBER8  ; IF < 0 IS 8
+ ;           AD K41      ; A IN ASCII = 41
+ ;           JP ENDCONVERT
+;
 ENDCONVERT RS CONVERT
-
         
